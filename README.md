@@ -1,5 +1,7 @@
 # Project Starters
 
+Commands executed on Monday 20th April 2026
+
 Commands executed to set up each subdirectory:
 
 ## shadcn

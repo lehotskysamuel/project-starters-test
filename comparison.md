@@ -19,14 +19,11 @@ This document compares five of the six project starters in this repo against the
 - Lodash
 - Axios
 
-**Under consideration (package manager / bundler / test runner):**
+**Under consideration:**
 
 - Vite
 - Vitest
 - Bun
-
-**Considerations for later (not required to be in the starter):**
-
 - Mock Service Worker (MSW)
 - Testing Library
 - Storybook
@@ -134,9 +131,6 @@ These need to be added manually regardless of which starter is chosen, so they a
 **From the "under consideration" list:**
 
 - Vitest
-
-**From the "considerations for later" list:**
-
 - Mock Service Worker (MSW)
 - Testing Library
 - Storybook
@@ -229,4 +223,4 @@ From **`monorepo/`**:
 - **SSG** — set `prerender: true` (or an explicit route array) in `react-router.config.ts`.
 - **Zustand, TanStack Query, Lodash, Axios** — plain `bun add` of each; no configuration beyond a `QueryClientProvider` for TanStack Query.
 - **Vitest** (if adopted) — `bun add -D vitest jsdom @testing-library/react @testing-library/jest-dom`, plus a `vitest.config.ts` (or extend `vite.config.ts`).
-- **MSW, Testing Library, Storybook, tRPC** — add when the respective need arises (see `todo-v2.txt` for the follow-up experiments).
+- **MSW, Testing Library, Storybook, tRPC** — add when the respective need arises.
