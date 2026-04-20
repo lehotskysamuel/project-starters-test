@@ -8,7 +8,10 @@ See comparison.md for the analysis.
 
 ---
 
-There are the commands executed to set up each subdirectory:
+Commands executed on Monday 20th April 2026
+
+List of executed commands:
+
 
 ## shadcn
 

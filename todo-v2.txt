@@ -1,0 +1,11 @@
+Building the best starter
+=========================
+
+Working hypothesis: `router/` + `shadcn init` is our base. We will
+mutate `router/` in place (no scratch folder, no new directory) and
+layer crucial commands on top until the starter satisfies the full
+target stack.
+
+Crucial commands (ordered, to be executed later — not now):
+
+1. Execute `shadcn init` inside `router/`.
