@@ -1,0 +1,90 @@
+Comparison v2 — plan (do NOT execute yet)
+
+Goal: verify the "shadcn/ ≈ router/ + shadcn init" claim with a real
+experiment instead of inference, and collect any divergence we missed.
+
+--------------------------------------------------------------------
+1. Reproduce the shadcn starter from the router starter
+--------------------------------------------------------------------
+
+  a. Copy router/ to a scratch directory, e.g. router-plus-shadcn/.
+     (Do not mutate router/ in place — we want a reproducible diff.)
+
+  b. Inside router-plus-shadcn/, run the same command the shadcn/
+     starter was created with:
+
+       bunx --bun shadcn@latest init \
+         --template react-router \
+         --name router-plus-shadcn \
+         --base radix \
+         --no-monorepo \
+         --no-rtl \
+         -y
+
+  c. bun install, bun run dev, smoke-test the button demo.
+
+--------------------------------------------------------------------
+2. Diff router-plus-shadcn/ against shadcn/
+--------------------------------------------------------------------
+
+  a. diff -rq router-plus-shadcn/ shadcn/ — list every file that
+     differs or is missing on either side.
+
+  b. For each differing file, capture the actual diff and classify:
+       - pure version drift (e.g. RR 7.13 vs 7.14, Vite 7 vs 8)
+       - template content the shadcn CLI adds on top
+       - template content the RR CLI leaves in that shadcn CLI removes
+         (e.g. app/welcome/, Google Fonts preconnect in root.tsx)
+       - config that neither CLI produces and must have been added by
+         hand in shadcn/ (if any)
+
+  c. Expected finding, to be proven or disproven:
+       shadcn/ = router/ + `shadcn init` + minor manual edits
+       (name in package.json, React Router pinned an older minor,
+        possibly Prettier config hand-tuned).
+
+--------------------------------------------------------------------
+3. Do the same experiment for the monorepo starter
+--------------------------------------------------------------------
+
+  a. Create a fresh monorepo scaffold with:
+
+       bunx --bun shadcn@latest init \
+         --template react-router \
+         --name monorepo-repro \
+         --base radix \
+         --monorepo \
+         --no-rtl \
+         -y
+
+  b. Diff monorepo-repro/ against monorepo/. Same classification as
+     above. Confirm whether the `@remixicon/react`, `zod`, and Outfit
+     font inclusions are stock CLI output or hand-added.
+
+--------------------------------------------------------------------
+4. Update comparison.md with the findings
+--------------------------------------------------------------------
+
+  a. Replace "claim" wording with "verified: …" or "verified NOT: …".
+  b. If the experiment shows shadcn/ really is just
+     `router + shadcn init`, the "what to bring over from router/"
+     section collapses to the version bump only.
+  c. If the experiment shows extra hand-edits in shadcn/, enumerate
+     them (they're the actually interesting deltas worth porting).
+
+--------------------------------------------------------------------
+5. Clean up
+--------------------------------------------------------------------
+
+  Delete router-plus-shadcn/ and monorepo-repro/ after capturing the
+  diffs — do not commit the scratch directories.
+
+--------------------------------------------------------------------
+Out of scope for v2
+--------------------------------------------------------------------
+
+  - Adding React Compiler, Playwright, Zustand, TanStack Query,
+    Lodash, Axios, Zod, Vitest, MSW, Testing Library, Storybook, or
+    tRPC. These are stack-additions, tracked separately.
+  - Actually choosing the starter — v1 already recommends shadcn/.
+    v2 is only to verify the reasoning behind that recommendation.
